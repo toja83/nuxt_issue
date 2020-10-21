@@ -1,27 +1,12 @@
 <template>
   <div class="container">
     <div>
-      <Logo />
+      <img :src="c.image" />
       <h1 class="title">
-        nuxt_issue
+        {{ c.title }}
       </h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
+      <div>
+        {{ c.page.text }}
       </div>
       <div class="links">
         <NuxtLink to="/sub1/page1">Sub 1 - Page 1</NuxtLink>
@@ -31,12 +16,23 @@
         <NuxtLink to="/sub2/page1">Sub 2 - Page 1</NuxtLink>
         <NuxtLink to="/sub2/page2">Sub 2 - Page 2</NuxtLink>
       </div>
+      <div class="links">
+        <NuxtLink to="/">Back to index</NuxtLink>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  async asyncData({ $content, params }) {
+    const c = await $content('sub1', params.slug).fetch()
+
+    return {
+      c,
+    }
+  },
+}
 </script>
 
 <style>
