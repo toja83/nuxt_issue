@@ -6,6 +6,7 @@ const dev = process.env.NODE_ENV !== "production";
 (async () => {
   try {
     const nuxt = await loadNuxt({
+      rootDir: './web',
       for: dev ? 'dev' : 'start'
     });
     
